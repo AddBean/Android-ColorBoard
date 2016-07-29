@@ -7,6 +7,7 @@ import android.graphics.RectF;
 
 import com.addbean.autils.tools.ToolsUtils;
 import com.addbean.colorboard.ColorBoard;
+import com.addbean.colorboard.IItemClickListener;
 
 /**
  * Created by AddBean on 2016/7/28.
@@ -17,6 +18,7 @@ public abstract class BaseItem {
     protected int DP = 1;
     protected float mCurrentRadian;
     private Canvas mCanvas;
+    private IItemClickListener iItemClickListener;
 
     public BaseItem(Context context, ColorBoard colorBoard, int lap, int column) {
         DP = ToolsUtils.dpConvertToPx(context, 1);
@@ -25,11 +27,11 @@ public abstract class BaseItem {
         mItemMate.setColumn(column);
         mColorBoard = colorBoard;
         mItemMate.setRadian(360f / mColorBoard.getColumnSize());
+        mCurrentRadian = mItemMate.getColumn() * mItemMate.getRadian();
     }
 
     public void draw(Canvas canvas) {
         mCanvas = canvas;
-        mCurrentRadian = mItemMate.getColumn() * mItemMate.getRadian();
         int count = canvas.save();
         canvas.rotate(mCurrentRadian);
         onDraw(canvas);
@@ -72,8 +74,8 @@ public abstract class BaseItem {
 
     public boolean handleClick(float x1, float y1) {
         Point point = new Point((int) x1, (int) y1);
-        float cx = mItemMate.getItemRect().centerX();
-        float cy = mItemMate.getItemRect().centerY();
+        float cx =getItemRect().centerX();
+        float cy = getItemRect().centerY();
         float dx = point.x - cx;
         float dy = point.y - cy;
         float dr = (float) Math.sqrt(dx * dx + dy * dy);
@@ -83,6 +85,7 @@ public abstract class BaseItem {
         if (dd < getWidth() && dd > 0 && isInAngle) {
             mItemMate.setSelectType(ItemMate.SELECTED_TRUE);
             invalidate();
+            if (iItemClickListener != null) iItemClickListener.onItemClick(mItemMate);
             return onClick();
         } else {
             mItemMate.setSelectType(ItemMate.SELECTED_FALSE);
@@ -99,5 +102,7 @@ public abstract class BaseItem {
         mColorBoard.invalidate();
     }
 
-
+    public void setIItemClickListener(IItemClickListener mIItemClickListener) {
+        iItemClickListener = mIItemClickListener;
+    }
 }

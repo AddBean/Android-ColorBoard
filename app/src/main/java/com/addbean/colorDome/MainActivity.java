@@ -4,20 +4,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.addbean.colorboard.ColorBoard;
+import com.addbean.colorboard.IItemClickListener;
+import com.addbean.colorboard.items.ItemMate;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mButton;
+    private TextView mButton;
     private ColorBoard mColorBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.addbean.colorboard.R.layout.activity_main);
-        mButton = (Button) findViewById(com.addbean.colorboard.R.id.button);
-        mColorBoard = (ColorBoard) findViewById(com.addbean.colorboard.R.id.color_board);
+        setContentView(R.layout.activity_main);
+        mButton = (TextView) findViewById(R.id.button);
+        mColorBoard = (ColorBoard) findViewById(R.id.color_board);
         bindEvent();
         mColorBoard.show();
     }
@@ -27,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mColorBoard.show();
+            }
+        });
+        mColorBoard.setIItemClickListener(new IItemClickListener() {
+            @Override
+            public void onItemClick(ItemMate mate) {
+                Toast.makeText(getBaseContext(),""+mate.getText(),Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -15,6 +15,7 @@ import android.view.View;
 import com.addbean.autils.tools.ToolsUtils;
 import com.addbean.colorboard.items.ArcItem;
 import com.addbean.colorboard.items.BaseItem;
+import com.addbean.colorboard.items.ItemMate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +29,15 @@ public class ColorBoard extends View {
     private int DP = 1;
     private String TAG = "ColorBoard";
     private int mSize = 0;
+    private List<BaseItem> mItems = new ArrayList<>();
     public RectF mBaseRect = new RectF();
-    List<BaseItem> mItems = new ArrayList<>();
     public float mAnimState = 0;
     private boolean mIsShow;
     private float mStartDownY;
     private float mStartDownX;
     private Point mStartPoint = new Point();
     private boolean mClickEnable;
+    private IItemClickListener iItemClickListener;
 
     public ColorBoard(Context context) {
         super(context);
@@ -54,19 +56,19 @@ public class ColorBoard extends View {
 
     private void initView() {
         DP = ToolsUtils.dpConvertToPx(getContext(), 1);
-        for (int i = 0; i < getColumnSize(); i++) {
-            Random r = new Random();
-            float speed = 1 + r.nextInt(4);
-            int color = r.nextInt(255) << 16 + r.nextInt(255) << 8 + r.nextInt(255);
-            for (int j = 0; j < 1 + r.nextInt(getLapSize()); j++) {
-                ArcItem item = new ArcItem(getContext(), this, 8 + j, i);
-                item.getItemMate().setAlpha(255 - (int) (((float) j) * 500 / getLapSize()));
-                item.getItemMate().setColor(color);
-                item.getItemMate().setRandomSpeed(speed);
-                item.getItemMate().setText("" + j + "-" + i);
+        Const.initColorList();
+        for (int i = 0; i < Const.mColorList.size(); i++) {
+            ColorMate mate = Const.mColorList.get(i);
+            if (mate.getmLap() % 2 != 0) {
+                ArcItem item = new ArcItem(getContext(), this, 8 + mate.getmLap() / 2, mate.getmColumn());
+                item.getItemMate().setColor(mate.getmColor());
+                item.getItemMate().setRandomSpeed(2 + mate.getmColumn() % 3);
+                item.getItemMate().setText(mate.getmName());
+                item.setIItemClickListener(iItemClickListener);
                 mItems.add(item);
             }
         }
+        invalidate();
     }
 
     @Override
@@ -74,7 +76,7 @@ public class ColorBoard extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-        mSize = (int) (1.5f * Math.max(width, height));
+        mSize = (int) (1.8f * Math.max(width, height));
         mBaseRect.set(-mSize / 2, -mSize / 2, mSize / 2, mSize / 2);
     }
 
@@ -102,26 +104,25 @@ public class ColorBoard extends View {
 
     private boolean itemVisible(BaseItem item) {
         float degress = (item.getCurrentRadian() - mDegress) % 360;
-        if(degress<0)degress=360+degress;
-        return (degress < 30 && degress > 0)||(degress>330&&degress<360);
+        if (degress < 0) degress = 360 + degress;
+        return (degress < 60 && degress > 0) || (degress > 290 && degress < 360);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Point mPoint = getReversePoint(event);
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mStartDownX = mPoint.x;
                 mStartDownY = mPoint.y;
                 mStartPoint = mPoint;
-                mClickEnable = false;
+                mClickEnable = true;
                 break;
             case MotionEvent.ACTION_MOVE:
                 float dx = Math.abs(mPoint.x - mStartDownX);
                 float dy = Math.abs(mPoint.y - mStartDownY);
                 float dd = (float) Math.sqrt(dx * dx + dy * dy);
-                if (dd < 20) {
+                if (dd < 20&&mClickEnable) {
                     mClickEnable = true;
                     return true;
                 }
@@ -131,6 +132,7 @@ public class ColorBoard extends View {
                 mDegress = mDegress % 360;
                 Log.e(TAG, "mDegress:" + mDegress);
                 mStartPoint = getReversePoint(event);
+                mClickEnable = false;
                 break;
             case MotionEvent.ACTION_UP:
                 if (mClickEnable)
@@ -170,14 +172,15 @@ public class ColorBoard extends View {
     }
 
     public int getLapSize() {
-        return 16;
+        return Const.mColorLop;
     }
 
     public int getColumnSize() {
-        return 60;
+        return Const.mColorColumn;
     }
 
     public void show() {
+        ColorBoard.this.setVisibility(mAnimState!=0?VISIBLE:GONE);
         ValueAnimator animator = ValueAnimator.ofFloat(mIsShow ? 1f : 0f, mIsShow ? 0f : 1f).setDuration(500);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -185,8 +188,17 @@ public class ColorBoard extends View {
                 mAnimState = (float) animation.getAnimatedValue();
                 mIsShow = mAnimState == 1.0f;
                 postInvalidate();
+                ColorBoard.this.setVisibility(mAnimState!=0?VISIBLE:GONE);
             }
         });
         animator.start();
     }
+
+    public void setIItemClickListener(IItemClickListener mIItemClickListener) {
+        iItemClickListener = mIItemClickListener;
+        for(BaseItem item:mItems){
+            item.setIItemClickListener(iItemClickListener);
+        }
+    }
+
 }

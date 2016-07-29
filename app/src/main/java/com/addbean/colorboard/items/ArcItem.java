@@ -28,14 +28,15 @@ public class ArcItem extends BaseItem {
 
     @Override
     protected boolean onClick() {
-        return false;
+        mColorBoard.show();//点击收缩;
+        return true;
     }
 
     private void drawColorBg(Canvas canvas) {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(mItemMate.getColor());
-        paint.setAlpha(mItemMate.getAlpha());
+        paint.setColor(mItemMate.getColor()|0xff000000);
+//        paint.setAlpha(mItemMate.getAlpha());
         paint.setStrokeWidth(getWidth());
         Path path = new Path();
         paint.setStyle(Paint.Style.STROKE);
@@ -48,17 +49,17 @@ public class ArcItem extends BaseItem {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(Color.WHITE);
-        paint.setTextSize(getWidth() / 4);
+        paint.setTextSize(getWidth() / 5);
         paint.setStrokeWidth(1);
         canvas.drawText(mItemMate.getText(), getItemRect().right - getWidth() / 3, getItemRect().centerY() + getWidth() / 3, paint);
     }
 
     private void drawSelected(Canvas canvas) {
         Paint paint = new Paint();
-        paint.setStrokeWidth(1*DP);
+        paint.setStrokeWidth(getWidth());
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setAntiAlias(true);
-        paint.setAlpha(255);
+        paint.setAlpha(50);
         if (mItemMate.getSelectType() == ItemMate.SELECTED_TRUE) {
             paint.setColor(Color.RED);
             RectF oval = getItemRect();
