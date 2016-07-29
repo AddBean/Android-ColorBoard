@@ -6,7 +6,7 @@ import android.graphics.Point;
 import android.graphics.RectF;
 
 import com.addbean.autils.tools.ToolsUtils;
-import com.addbean.color_selector.ColorBoard;
+import com.addbean.colorboard.ColorBoard;
 
 /**
  * Created by AddBean on 2016/7/28.

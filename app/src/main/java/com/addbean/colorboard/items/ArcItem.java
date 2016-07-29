@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 
-import com.addbean.color_selector.ColorBoard;
+import com.addbean.colorboard.ColorBoard;
 
 /**
  * Created by AddBean on 2016/7/28.

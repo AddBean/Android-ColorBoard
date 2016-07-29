@@ -1,4 +1,4 @@
-package com.addbean.color_selector;
+package com.addbean.colorboard;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
