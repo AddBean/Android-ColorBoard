@@ -7,9 +7,11 @@ import java.util.List;
  * Created by AddBean on 2016/7/30.
  */
 public class Const {
+    public static List<ColorMate> mOtherColorList = new ArrayList<>();
     public static List<ColorMate> mColorList = new ArrayList<>();
     public static int mColorColumn = 86;
     public static int mColorLop = 15;
+
     public static List<ColorMate> initColorList() {
         if (mColorList.size() > 0) return mColorList;
         mColorList.add(new ColorMate(0, 85, 0x7E60CE, "814C"));
@@ -864,5 +866,49 @@ public class Const {
         mColorList.add(new ColorMate(5, 0, 0xFAE051, "114C"));
         mColorList.add(new ColorMate(6, 0, 0xFAE15A, "113C"));
         return mColorList;
+    }
+
+
+    public static List<ColorMate> initOtherColorList() {
+        if (mOtherColorList.size() > 0) return mOtherColorList;
+        mOtherColorList.add(new ColorMate(0, -1, 0xED5565, "GRAPEFRUIT"));
+        mOtherColorList.add(new ColorMate(0, -1, 0xDA4453, "GRAPEFRUIT"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0xFC6E51, "BITTERSWEET"));
+        mOtherColorList.add(new ColorMate(0, -1, 0xE9573F, "BITTERSWEET"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0xFFCE54, "SUNFLOWER"));
+        mOtherColorList.add(new ColorMate(0, -1, 0xF6BB42, "SUNFLOWER"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0xA0D468, "GRASS"));
+        mOtherColorList.add(new ColorMate(0, -1, 0x8CC152, "GRASS"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0x48CFAD, "MINT"));
+        mOtherColorList.add(new ColorMate(0, -1, 0x37BC9B, "MINT"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0x4FC1E9, "AQUA"));
+        mOtherColorList.add(new ColorMate(0, -1, 0x3BAFBA, "AQUA"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0x5D9CEC, "BLUE\nJEANS"));
+        mOtherColorList.add(new ColorMate(0, -1, 0x4A89DC, "BLUE\nJEANS"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0xAC92EC, "LAVANDER"));
+        mOtherColorList.add(new ColorMate(0, -1, 0x967ADC, "LAVANDER"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0xEC87C0, "PINK ROSE"));
+        mOtherColorList.add(new ColorMate(0, -1, 0xD770AD, "PINK ROSE"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0xF5F7FA, "LOGHT GRAY"));
+        mOtherColorList.add(new ColorMate(0, -1, 0xE6E9ED, "LOGHT GRAY"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0xCCD1D9, "MEDIUM GRAY"));
+        mOtherColorList.add(new ColorMate(0, -1, 0xAAB2BD, "MEDIUM GRAY"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0x656D78, "DARK GRAY"));
+        mOtherColorList.add(new ColorMate(0, -1, 0x434A54, "DARK GRAY"));
+
+        mOtherColorList.add(new ColorMate(0, -1, 0x000000, "BLACK"));
+        mOtherColorList.add(new ColorMate(0, -1, 0xFFFFFF, "WHITE"));
+        return mOtherColorList;
     }
 }

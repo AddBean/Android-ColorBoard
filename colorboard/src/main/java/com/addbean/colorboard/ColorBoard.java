@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -16,6 +15,8 @@ import android.view.View;
 
 import com.addbean.colorboard.items.ArcItem;
 import com.addbean.colorboard.items.BaseItem;
+import com.addbean.colorboard.items.OtherItem;
+import com.addbean.colorboard.items.ItemMate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class ColorBoard extends View implements GestureDetector.OnGestureListene
     private int mStartLaps = -1;
     public static final int CENTER = 0, TOP = 1, DOWN = 2, LEFT = 4, RIGHT = 8;
     private int mMargin = -1;
+    public static List<ItemMate> mOtherList = new ArrayList<>();
 
     public ColorBoard(Context context) {
         super(context);
@@ -67,7 +69,7 @@ public class ColorBoard extends View implements GestureDetector.OnGestureListene
         if (mPosition < 0)
             mPosition = typedArray.getInt(R.styleable.ColorBoard_colorPosition, 8);
         if (mStartLaps < 0)
-            mStartLaps = typedArray.getInt(R.styleable.ColorBoard_startLap, 8);
+            mStartLaps = typedArray.getInt(R.styleable.ColorBoard_startLap, 5);
         if (mMargin < 0)
             mMargin = (int) typedArray.getDimension(R.styleable.ColorBoard_margin, 0);
         Log.e(TAG, "mMargin" + mMargin);
@@ -78,6 +80,7 @@ public class ColorBoard extends View implements GestureDetector.OnGestureListene
         mDetector = new GestureDetector(this);
         DP = ToolsUtils.dp2Px(getContext(), 1);
         Const.initColorList();
+        Const.initOtherColorList();
         for (int i = 0; i < Const.mColorList.size(); i++) {
             ColorMate mate = Const.mColorList.get(i);
             if (mate.getmLap() % 2 != 0) {
@@ -89,8 +92,18 @@ public class ColorBoard extends View implements GestureDetector.OnGestureListene
                 mItems.add(item);
             }
         }
+        for (int i = 0; i < Const.mOtherColorList.size(); i++) {
+            ColorMate mate = Const.mOtherColorList.get(i);
+            OtherItem item = new OtherItem(getContext(), this, mStartLaps - 1, i, Const.mOtherColorList.size()+6);
+            item.getItemMate().setColor(mate.getmColor());
+            item.getItemMate().setRandomSpeed(2 + mate.getmColumn() % 3);
+            item.getItemMate().setText(mate.getmName());
+            item.setIItemClickListener(iItemClickListener);
+            mItems.add(item);
+        }
         invalidate();
     }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

@@ -68,6 +68,10 @@ public abstract class BaseItem {
         return mItemMate.getWidth();
     }
 
+    public void setmItemMate(ItemMate mItemMate) {
+        this.mItemMate = mItemMate;
+    }
+
     public ItemMate getItemMate() {
         return mItemMate;
     }
