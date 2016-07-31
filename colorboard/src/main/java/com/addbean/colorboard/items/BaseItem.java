@@ -5,9 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.RectF;
 
-import com.addbean.autils.tools.ToolsUtils;
 import com.addbean.colorboard.ColorBoard;
 import com.addbean.colorboard.IItemClickListener;
+import com.addbean.colorboard.ToolsUtils;
 
 /**
  * Created by AddBean on 2016/7/28.
@@ -21,7 +21,7 @@ public abstract class BaseItem {
     private IItemClickListener iItemClickListener;
 
     public BaseItem(Context context, ColorBoard colorBoard, int lap, int column) {
-        DP = ToolsUtils.dpConvertToPx(context, 1);
+        DP = ToolsUtils.dp2Px(context, 1);
         mItemMate = new ItemMate();
         mItemMate.setLap(lap);
         mItemMate.setColumn(column);
