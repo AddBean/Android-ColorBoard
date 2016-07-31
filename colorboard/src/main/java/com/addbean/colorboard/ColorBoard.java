@@ -116,11 +116,11 @@ public class ColorBoard extends View implements GestureDetector.OnGestureListene
             if (itemVisible(item))
                 item.draw(canvas);
         }
-        Paint paint = new Paint();
-        paint.setStrokeWidth(2 * DP);
-        paint.setStyle(Paint.Style.STROKE);
-        canvas.drawCircle(0, 0, mSize / 2, paint);
-        canvas.drawCircle(mStartPoint.x, mStartPoint.y, 10 * DP, paint);
+//        Paint paint = new Paint();
+//        paint.setStrokeWidth(2 * DP);
+//        paint.setStyle(Paint.Style.STROKE);
+//        canvas.drawCircle(0, 0, mSize / 2, paint);
+//        canvas.drawCircle(mStartPoint.x, mStartPoint.y, 10 * DP, paint);
     }
 
     private boolean itemVisible(BaseItem item) {
