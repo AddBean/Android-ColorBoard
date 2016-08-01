@@ -57,7 +57,7 @@ public class OtherItem extends BaseItem {
         RectF oval = new RectF(getItemRect());
         oval.inset(mInset,mInset);
         path.addArc(oval, 0, mItemMate.getRadian());
-        canvas.drawTextOnPath(mItemMate.getText(), path,1.5f*DP,0, paint);
+        canvas.drawTextOnPath(mItemMate.getText(), path,3f*DP,0, paint);
     }
 
     private void drawSelected(Canvas canvas) {

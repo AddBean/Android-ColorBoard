@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.addbean.autils.tools.ToolsUtils;
 import com.addbean.colorboard.ColorBoard;
 import com.addbean.colorboard.IItemClickListener;
 import com.addbean.colorboard.items.ItemMate;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mButton7;
     private TextView mButton8;
     private ColorBoard mColorBoard;
+    private View mRootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         mButton6 = (TextView) findViewById(R.id.button_6);
         mButton7 = (TextView) findViewById(R.id.button_7);
         mButton8 = (TextView) findViewById(R.id.button_8);
+        mRootView = findViewById(R.id.root_view);
         mColorBoard = (ColorBoard) findViewById(R.id.color_board);
         bindEvent();
         mColorBoard.show();
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         mButton0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mColorBoard.setStartLaps(4);
                 mColorBoard.setPosition(ColorBoard.CENTER);
                 mColorBoard.show();
             }
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mColorBoard.setPosition(ColorBoard.TOP | ColorBoard.LEFT);
+                mColorBoard.setMargin(ToolsUtils.dpConvertToPx(getBaseContext(), 40));
                 mColorBoard.show();
             }
         });
@@ -109,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(ItemMate mate) {
                 Toast.makeText(getBaseContext(), "" + mate.getText(), Toast.LENGTH_SHORT).show();
+                mRootView.setBackgroundColor(mate.getColor() | 0xff000000);
             }
         });
     }

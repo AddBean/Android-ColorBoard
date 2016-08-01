@@ -94,7 +94,7 @@ public class ColorBoard extends View implements GestureDetector.OnGestureListene
         }
         for (int i = 0; i < Const.mOtherColorList.size(); i++) {
             ColorMate mate = Const.mOtherColorList.get(i);
-            OtherItem item = new OtherItem(getContext(), this, mStartLaps - 1, i, Const.mOtherColorList.size()+6);
+            OtherItem item = new OtherItem(getContext(), this, mStartLaps - 1, i, Const.mOtherColorList.size()+5);
             item.getItemMate().setColor(mate.getmColor());
             item.getItemMate().setRandomSpeed(2 + mate.getmColumn() % 3);
             item.getItemMate().setText(mate.getmName());

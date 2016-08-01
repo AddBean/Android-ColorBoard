@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/ic_launcher"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/root_view"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="中" />
+            android:text="中"/>
 
         <TextView
             android:id="@+id/button_1"
@@ -28,7 +28,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="上" />
+            android:text="上"/>
 
         <TextView
             android:id="@+id/button_2"
@@ -38,7 +38,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="下" />
+            android:text="下"/>
 
         <TextView
             android:id="@+id/button_3"
@@ -47,7 +47,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="左" />
+            android:text="左"/>
 
         <TextView
             android:id="@+id/button_4"
@@ -56,7 +56,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="右" />
+            android:text="右"/>
 
         <TextView
             android:id="@+id/button_5"
@@ -66,7 +66,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="上左" />
+            android:text="上左"/>
 
         <TextView
             android:id="@+id/button_6"
@@ -76,7 +76,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="上右" />
+            android:text="上右"/>
 
         <TextView
             android:id="@+id/button_7"
@@ -86,7 +86,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="下左" />
+            android:text="下左"/>
 
         <TextView
             android:id="@+id/button_8"
@@ -96,7 +96,7 @@
             android:layout_margin="8dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="下右" />
+            android:text="下右"/>
 
     </LinearLayout>
 
@@ -107,7 +107,7 @@
         android:layout_centerInParent="true"
         app:colorPosition="left"
         app:margin="100dp"
-        app:startLap="8" />
+        app:startLap="8"/>
 
 
 </LinearLayout>
