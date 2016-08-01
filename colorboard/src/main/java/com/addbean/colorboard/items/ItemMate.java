@@ -20,6 +20,7 @@ public class ItemMate {
     private String mText;
     private int mSelectType = 0;
 
+
     public int getSelectType() {
         return mSelectType;
     }

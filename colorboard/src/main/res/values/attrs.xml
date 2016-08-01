@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+
+    <declare-styleable name="ColorBoard" >
+        <attr name="colorPosition" >
+            <flag name="center" value="0"></flag>
+            <flag name="top" value="1"></flag>
+            <flag name="down" value="2"></flag>
+            <flag name="left" value="4"></flag>
+            <flag name="right" value="8"></flag>
+        </attr>
+        <attr name="startLap" format="integer"></attr>
+        <attr name="margin" format="dimension"></attr>
+    </declare-styleable>
+
+</resources>
