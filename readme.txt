@@ -1,1 +1,2 @@
-ÕâÊÇ¸ö¿ªÔ´ÏîÄ¿,Í¼Æ¬Ñ¡ÔñÆ÷£¬¿ªÔ´µØÖ·£ºhttps://github.com/AddBean/ColorBoard.git
+æ¼”ç¤ºæ•ˆæœï¼š
+![æ¼”ç¤ºæ•ˆæœ](http://upload-images.jianshu.io/upload_images/2624573-4ee9a1c2b95a93f6.gif?imageMogr2/auto-orient/strip)
