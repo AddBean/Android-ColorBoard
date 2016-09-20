@@ -1,2 +1,2 @@
 演示效果：
-(https://github.com/AddBean/ColorBoard/blob/master/gif/demo.gif?raw=true)
+(https://raw.githubusercontent.com/AddBean/ColorBoard/master/gif/demo.gif)
